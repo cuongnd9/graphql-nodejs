@@ -51,6 +51,24 @@ fragment catFields on Cat {
 }
 ```
 
+2. Mutation
+
+![mutation](./images/mutation.png)
+
+```
+mutation updateCatColor($id: Int!, $newColor: String!) {
+  updateCatColor(id: $id, newColor: $newColor) {
+    ...catFields
+  }
+}
+
+fragment catFields on Cat {
+  id
+  name
+  color
+}
+```
+
 🙌 Awesome
 
 ## Contributors

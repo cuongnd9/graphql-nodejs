@@ -38,6 +38,9 @@ const schema = buildSchema(`
         cat(id: Int!): Cat
         cats(color: String): [Cat]
     },
+    type Mutation {
+        updateCatColor(id: Int!, newColor: String!): Cat
+    },
     type Cat {
         id: Int
         name: String
@@ -46,12 +49,20 @@ const schema = buildSchema(`
 `);
 
 // Root resolver.
-const getCat = args => catsData.find(catData => (catData.id = args.id));
-const getCats = args =>
-  catsData.filter(catData => catData.color === args.color);
+const getCat = ({ id }) => catsData.find(catData => (catData.id = id));
+const getCats = ({ color }) =>
+  catsData.filter(catData => catData.color === color);
+const updateCatColor = ({ id, newColor }) =>
+  catsData
+    .filter(catData => catData.id === id)
+    .map(catData => ({
+      ...catData,
+      color: newColor
+    }))[0];
 const root = {
   cat: getCat,
-  cats: getCats
+  cats: getCats,
+  updateCatColor
 };
 
 app.use(
