@@ -18,6 +18,39 @@ $ npm i
 $ npm start
 ```
 
+### Client
+
+1. Query, aliases and fragments
+
+![query](./images/query.png)
+
+```
+query getCat($catId: Int!) {
+  cat(id: $catId) {
+    id
+    name
+    color
+  }
+}
+```
+
+```
+query getCatWithFagments($catId1: Int!, $catId2: Int!) {
+  cat1: cat(id: $catId1) {
+    ...catFields
+  },
+  cat2: cat(id: $catId2) {
+    ...catFields
+  }
+}
+
+fragment catFields on Cat {
+  id
+  name
+  color
+}
+```
+
 🙌 Awesome
 
 ## Contributors
