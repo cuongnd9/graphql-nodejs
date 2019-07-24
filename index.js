@@ -49,7 +49,7 @@ const schema = buildSchema(`
 `);
 
 // Root resolver.
-const getCat = ({ id }) => catsData.find(catData => (catData.id = id));
+const getCat = ({ id }) => catsData.find(catData => catData.id === id);
 const getCats = ({ color }) =>
   catsData.filter(catData => catData.color === color);
 const updateCatColor = ({ id, newColor }) =>
